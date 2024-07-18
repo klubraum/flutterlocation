@@ -56,8 +56,9 @@ class LocationWebPlugin extends LocationPlatform {
 
   @override
   Future<PermissionStatus> hasPermission() async {
+    final query = {'name': 'geolocation'}.jsify()! as JSObject;
     final web.PermissionStatus result =
-        await _permissions.query({'name': 'geolocation'}.toJSBox).toDart;
+        await _permissions.query(query).toDart;
 
     switch (result.state) {
       case 'granted':
